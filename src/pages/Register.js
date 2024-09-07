@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { setDoc, doc, Timestamp } from "firebase/firestore";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Input } from "antd";
 
 const Register = () => {
@@ -14,7 +14,7 @@ const Register = () => {
     loading: false,
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { name, email, password, error, loading } = data;
 
@@ -32,7 +32,7 @@ const Register = () => {
       const result = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       await setDoc(doc(db, "users", result.user.uid), {
         uid: result.user.uid,
@@ -56,34 +56,40 @@ const Register = () => {
   return (
     <section>
       <h3>Create An Account</h3>
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="input_container">
-          <label htmlFor="name">Name</label>
-          <Input className="text-black" type="text" name="name" value={name} onChange={handleChange} />
+      <form className='form' onSubmit={handleSubmit}>
+        <div className='input_container'>
+          <label htmlFor='name'>Name</label>
+          <input
+            className='text-black bg-white hover:'
+            type='text'
+            name='name'
+            value={name}
+            onChange={handleChange}
+          />
         </div>
-        <div className="input_container">
-          <label htmlFor="email">Email</label>
-          <Input
-          className="text-black"
-            type="text"
-            name="email"
+        <div className='input_container'>
+          <label htmlFor='email'>Email</label>
+          <input
+            className='text-black'
+            type='text'
+            name='email'
             value={email}
             onChange={handleChange}
           />
         </div>
-        <div className="input_container">
-          <label htmlFor="password">Password</label>
-          <Input
-          className="text-black"
-            type="password"
-            name="password"
+        <div className='input_container'>
+          <label htmlFor='password'>Password</label>
+          <input
+            className='text-black'
+            type='password'
+            name='password'
             value={password}
             onChange={handleChange}
           />
         </div>
-        {error ? <p className="error">{error}</p> : null}
-        <div className="btn_container">
-          <button className="btn" disabled={loading}>
+        {error ? <p className='error'>{error}</p> : null}
+        <div className='btn_container'>
+          <button className='btn' disabled={loading}>
             {loading ? "Creating ..." : "Register"}
           </button>
         </div>

@@ -51,7 +51,7 @@ const Login = () => {
       <form className="form" onSubmit={handleSubmit}>
         <div className="input_container">
           <label htmlFor="email">Email</label>
-          <Input
+          <input
           className="text-black"
             type="text"
             name="email"
@@ -62,7 +62,7 @@ const Login = () => {
         <div className="input_container ">
           <label htmlFor="password">Password</label>
           <Input.Password
-          className="bg-white"
+          className="text-black"
             type="password"
             name="password"
             value={password}

@@ -58,7 +58,7 @@ const Navbar = () => {
       console.error("Google kirishda xato", error);
     }
   };
-  console.log(location.pathname);
+
 
   return (
     <nav>
