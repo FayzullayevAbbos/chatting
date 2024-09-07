@@ -13,7 +13,7 @@ const MessageForm = ({ handleSubmit, text, setText }) => {
         <Input
           style={{
             // backgroundColor: "#333333",
-            color: "white",
+            color: "black",
             border: "1px solid #333",
             padding: "10px",
           }}
