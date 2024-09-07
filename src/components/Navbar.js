@@ -20,11 +20,11 @@ import { GoogleOutlined } from "@ant-design/icons";
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useContext(AuthContext);
+  const { user, setGoogle, google } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
 
   const handleSignout = async () => {
-    
+    setGoogle(false);
     try {
       await updateDoc(doc(db, "users", auth.currentUser.uid), {
         isOnline: false,
@@ -38,8 +38,10 @@ const Navbar = () => {
 
   const signInWithGoogle = async () => {
     try {
-      const result = await signInWithRedirect(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+
       const user = result.user;
+
       await setDoc(doc(db, "users", result.user.uid), {
         uid: user.uid,
         name: user.displayName,
@@ -48,18 +50,14 @@ const Navbar = () => {
         isOnline: true,
       });
 
-      console.log(user);
+      setGoogle(true);
 
-      console.log(
-        "Google foydalanuvchi kirishi muvaffaqiyatli",
-
-        navigate("/"),
-      );
+      navigate("/");
+      console.log("Google foydalanuvchi kirishi muvaffaqiyatli");
     } catch (error) {
       console.error("Google kirishda xato", error);
     }
   };
-
 
   return (
     <nav>
@@ -69,7 +67,6 @@ const Navbar = () => {
       <div>
         {user ? (
           <>
-           
             <button className='btn' onClick={handleSignout}>
               Logout
             </button>
