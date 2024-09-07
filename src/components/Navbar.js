@@ -4,6 +4,7 @@ import { auth, db } from "../firebase";
 import {
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
 } from "firebase/auth";
 import {
@@ -37,7 +38,7 @@ const Navbar = () => {
 
   const signInWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
+      const result = await signInWithRedirect(auth, googleProvider);
       const user = result.user;
       await setDoc(doc(db, "users", result.user.uid), {
         uid: user.uid,
