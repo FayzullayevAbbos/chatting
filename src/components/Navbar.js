@@ -20,11 +20,11 @@ import { GoogleOutlined } from "@ant-design/icons";
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, setGoogle, google } = useContext(AuthContext);
+  const { user,  } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
 
   const handleSignout = async () => {
-    setGoogle(false);
+    
     try {
       await updateDoc(doc(db, "users", auth.currentUser.uid), {
         isOnline: false,
@@ -50,7 +50,7 @@ const Navbar = () => {
         isOnline: true,
       });
 
-      setGoogle(true);
+      
 
       navigate("/");
       console.log("Google foydalanuvchi kirishi muvaffaqiyatli");
