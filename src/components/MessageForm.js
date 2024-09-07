@@ -1,29 +1,32 @@
 import React from "react";
-import Attachment from "./svg/Attachment";
 
-const MessageForm = ({ handleSubmit, text, setText, setImg }) => {
+import { Button, Input } from "antd";
+import { SendOutlined } from "@ant-design/icons";
+
+const MessageForm = ({ handleSubmit, text, setText }) => {
   return (
-    <form className="message_form" onSubmit={handleSubmit}>
-      <label htmlFor="img">
-        <Attachment />
-      </label>
-      <input
-        onChange={(e) => setImg(e.target.files[0])}
-        type="file"
-        id="img"
-        accept="image/*"
-        style={{ display: "none" }}
-      />
+    <form
+      className='message_form relative '
+      onSubmit={handleSubmit}
+    >
       <div>
-        <input
-          type="text"
-          placeholder="Enter message"
+        <Input
+          style={{
+            // backgroundColor: "#333333",
+            color: "white",
+            border: "1px solid #333",
+            padding: "10px",
+          }}
+          type='text'
+          placeholder='Enter message'
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
       </div>
-      <div>
-        <button className="btn">Send</button>
+      <div className='absolute right-[46%] bottom-[3px]'>
+        <Button htmlType="submit" className='h-9' type='primary' large>
+          <SendOutlined />
+        </Button>
       </div>
     </form>
   );

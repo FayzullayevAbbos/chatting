@@ -255,9 +255,7 @@ section .form {
   padding: 2px 4px;
   border-radius: 10px;
 }
-.sm_screen {
-  display: none;
-}
+
 @media screen and (max-width: 767px) {
   .home_container {
     grid-template-columns: 2fr 3fr;
@@ -276,19 +274,19 @@ section .form {
   .home_container {
     grid-template-columns: 1fr 5fr;
   }
-  .user_wrapper {
-    display: none;
-  }
+ 
   .sm_container {
     padding: 10px 0px;
-    text-align: center;
+    display: flex ;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
   .sm_screen {
     display: inline-block;
   }
   .message_form input {
-    width: 50vw;
+    width: 100%;
     margin: 0px 10px;
   }
   .message_form .btn {
@@ -298,4 +296,26 @@ section .form {
   .message_wrapper p {
     max-width: 100%;
   }
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #242526;
+  color: white;
+}
+.ant-input{
+  background-color: black !important;
+}
+.hidden{
+  display: none !important;
+}
+.block{
+  display: block !important;
+}
+.flex{
+  display: flex !important;
 }

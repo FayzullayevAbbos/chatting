@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { setDoc, doc, Timestamp } from "firebase/firestore";
-import { useHistory } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { Input } from "antd";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -13,7 +14,7 @@ const Register = () => {
     loading: false,
   });
 
-  const history = useHistory();
+  const navigate = useNavigate()
 
   const { name, email, password, error, loading } = data;
 
@@ -47,7 +48,7 @@ const Register = () => {
         error: null,
         loading: false,
       });
-      history.replace("/");
+      navigate("/");
     } catch (err) {
       setData({ ...data, error: err.message, loading: false });
     }
@@ -58,11 +59,12 @@ const Register = () => {
       <form className="form" onSubmit={handleSubmit}>
         <div className="input_container">
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" value={name} onChange={handleChange} />
+          <Input className="text-black" type="text" name="name" value={name} onChange={handleChange} />
         </div>
         <div className="input_container">
           <label htmlFor="email">Email</label>
-          <input
+          <Input
+          className="text-black"
             type="text"
             name="email"
             value={email}
@@ -71,7 +73,8 @@ const Register = () => {
         </div>
         <div className="input_container">
           <label htmlFor="password">Password</label>
-          <input
+          <Input
+          className="text-black"
             type="password"
             name="password"
             value={password}

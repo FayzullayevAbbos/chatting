@@ -29,9 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     const usersRef = collection(db, "users");
-    // create query object
     const q = query(usersRef, where("uid", "not-in", [user1]));
-    // execute query
     const unsub = onSnapshot(q, (querySnapshot) => {
       let users = [];
       querySnapshot.forEach((doc) => {
@@ -59,18 +57,16 @@ const Home = () => {
       setMsgs(msgs);
     });
 
-    // get last message b/w logged in user and selected user
+  
     const docSnap = await getDoc(doc(db, "lastMsg", id));
-    // if last message exists and message is from selected user
     if (docSnap.data() && docSnap.data().from !== user1) {
-      // update last message doc, set unread to false
       await updateDoc(doc(db, "lastMsg", id), { unread: false });
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setText("");
     const user2 = chat.uid;
 
     const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
@@ -103,9 +99,11 @@ const Home = () => {
       unread: true,
     });
 
-    setText("");
+    
     setImg("");
   };
+  const [online , setOnline] = useState(false)
+  
   return (
     <div className="home_container">
       <div className="users_container">
@@ -116,14 +114,20 @@ const Home = () => {
             selectUser={selectUser}
             user1={user1}
             chat={chat}
+            setOnline={setOnline}
           />
         ))}
       </div>
       <div className="messages_container">
         {chat ? (
           <>
-            <div className="messages_user">
-              <h3>{chat.name}</h3>
+            <div className="messages_use border-b border-black flex flex-col items-start pl-10 justify-center  mt-2 h-[74px] ">
+              <h3 className="text-[20px] font-semibold">{chat.name}</h3>
+            
+            
+              <p className=" opacity-[0.4]">
+                {online ? 'online' : "offline"}
+              </p>
             </div>
             <div className="messages">
               {msgs.length
@@ -136,11 +140,11 @@ const Home = () => {
               handleSubmit={handleSubmit}
               text={text}
               setText={setText}
-              setImg={setImg}
+              
             />
           </>
         ) : (
-          <h3 className="no_conv">Select a user to start conversation</h3>
+          <h3 className="no_conv">Select a chat to start messaging</h3>
         )}
       </div>
     </div>
